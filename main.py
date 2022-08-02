@@ -64,9 +64,11 @@ def gen_row(data_type, type_list):
 
 
 if __name__ == '__main__':
-    data_type = sys.argv[0]
-    row_count = int(sys.argv[1])
-    type_list = sys.argv[2].split(",")
+    data_type = sys.argv[1]
+    row_count = int(sys.argv[2])
+    type_list = sys.argv[3].split(",")
 
+    f = open("demofile2.txt", "a")
     for i in range(row_count):
-        print(gen_row(data_type, type_list))
+        f.write(gen_row(data_type, type_list) + "\n")
+    f.close()
