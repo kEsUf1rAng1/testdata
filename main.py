@@ -4,12 +4,17 @@ import sys
 from datetime import datetime, timedelta
 
 
-def gen_datetime(min_year=2012, max_year=datetime.now().year):
+def gen_datetime_3(min_year=2012, max_year=datetime.now().year):
     start = datetime(min_year, 1, 1, 00, 00, 00)
     years = max_year - min_year + 1
     end = start + timedelta(days=365 * years)
     return start + (end - start) * random.random()
 
+def gen_datetime_2_7(min_year=2012, max_year=datetime.now().year):
+    inicio = datetime(2017, 1, 30)
+    final = datetime(2017, 5, 28)
+    random_date = inicio + timedelta(seconds=int((final - inicio).total_seconds() * random.random()))
+    return str(random_date) + str(round(random.random(),6))
 
 def gen_int(min=0, max=99):
     return random.randint(min, max)
@@ -48,7 +53,7 @@ def gen_row(data_type, type_list):
         elif col_type == "date":
             col_val = str(gen_date())
         elif col_type == "timestamp":
-            col_val = str(gen_datetime())
+            col_val = str(gen_datetime_2_7())
         else:
             col_val = gen_string()
 
@@ -66,9 +71,10 @@ def gen_row(data_type, type_list):
 if __name__ == '__main__':
     data_type = sys.argv[1]
     row_count = int(sys.argv[2])
-    type_list = sys.argv[3].split(",")
+    file_name = sys.argv[3]
+    type_list = sys.argv[4].split(",")
 
-    f = open("demofile2.txt", "a")
+    f = open(file_name, "a")
     for i in range(row_count):
         f.write(gen_row(data_type, type_list) + "\n")
     f.close()
