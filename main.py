@@ -93,11 +93,10 @@ if __name__ == '__main__':
     data_type = sys.argv[1]
     row_count = int(sys.argv[2])
     file_name = sys.argv[3]
-    # type_list = sys.argv[4].split(",")
-    type_list = "date|decimal(2)|decimal(10,3)|char(1)|varchar(3)".split("|")
-    print(gen_row(data_type, type_list))
+    type_list = sys.argv[4].split(",")
+    # type_list = "date|decimal(2)|decimal(10,3)|char(1)|varchar(3)".split("|")
 
-    # f = open(file_name, "a")
-    # for i in range(row_count):
-    #    f.write(gen_row(data_type, type_list) + "\n")
-    # f.close()
+    f = open(file_name, "a")
+    for i in range(row_count):
+        f.write(gen_row(data_type, type_list) + "\n")
+    f.close()
